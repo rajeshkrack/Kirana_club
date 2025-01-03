@@ -6,7 +6,7 @@ import ContestDetails from "./pages/ContestDetails";
 function App() {
   return (
     <AppProvider i18n={{}}>
-        <div className="bg-teal-100 min-h-screen">
+      <div className="min-h-screen" style={{ backgroundColor: '#d3f8f8' }}>
         <Routes>
           <Route path="/" element={<Dashboard />} />
           <Route path="/contest/:contestId" element={<ContestDetails />} />

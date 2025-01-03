@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { fetchContests } from "../utils/api";
 import { formatDate } from "../utils/helpers";
 import { Page, Card, BlockStack, Text, Spinner, Layout, Footer } from "@shopify/polaris";
+import './styles/ContestPage.css'; // Import the custom CSS file
 
 const ContestPage = () => {
   const { contestId } = useParams();
@@ -17,7 +18,7 @@ const ContestPage = () => {
 
   if (!contest) {
     return (
-      <div className="flex items-center justify-center min-h-screen bg-gray-100">
+      <div className="flex">
         <Spinner size="large" />
       </div>
     );
@@ -49,14 +50,13 @@ const ContestPage = () => {
         </Layout.Section>
       </Layout>
 
-      {/* Using Footer from Polaris */}
       <Footer
         primaryAction={{
           content: "Go to Contests",
           url: "/contests", // Replace with your contest listing page URL
         }}
       >
-        <div className="text-center text-white py-6 bg-gray-800">
+        <div className="text-center py-6">
           <p>&copy; 2025 Codeforces Dashboard. All rights reserved.</p>
         </div>
       </Footer>

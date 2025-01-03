@@ -10,6 +10,7 @@ import {
   Legend,
 } from "chart.js";
 import { Card, Text } from "@shopify/polaris";
+import "./styles/Graph.css"; // Importing the custom CSS
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
@@ -33,7 +34,24 @@ const Graph = ({ contests, filterPhase, filterType }) => {
       {
         label: "Duration (Seconds)",
         data: filteredContests.map((contest) => contest.durationSeconds),
-        backgroundColor: "rgba(75,192,192,0.6)", // Greenish color
+        backgroundColor: [
+          "#ff6384",
+          "#36a2eb",
+          "#ffce56",
+          "#4bc0c0",
+          "#9966ff",
+          "#ff9f40",
+        ],
+        hoverBackgroundColor: [
+          "#ff435e",
+          "#239bdd",
+          "#ffd146",
+          "#3ca6a6",
+          "#8858e0",
+          "#ff8c34",
+        ],
+        borderColor: "#ffffff",
+        borderWidth: 2,
       },
     ],
   };
@@ -43,16 +61,28 @@ const Graph = ({ contests, filterPhase, filterType }) => {
     plugins: {
       legend: {
         position: "top",
+        labels: {
+          font: {
+            size: 14,
+          },
+        },
       },
       title: {
         display: true,
         text: "Contest Durations",
         font: {
-          size: 18,
+          size: 20,
         },
-        color: "#333",
+        color: "#333333",
       },
       tooltip: {
+        backgroundColor: "rgba(0,0,0,0.8)",
+        titleFont: {
+          size: 14,
+        },
+        bodyFont: {
+          size: 12,
+        },
         callbacks: {
           title: function (tooltipItem) {
             return `Contest: ${tooltipItem[0].label}`;
@@ -65,18 +95,34 @@ const Graph = ({ contests, filterPhase, filterType }) => {
         },
       },
     },
+    scales: {
+      x: {
+        grid: {
+          color: "rgba(200,200,200,0.3)",
+        },
+        ticks: {
+          color: "#333333",
+        },
+      },
+      y: {
+        grid: {
+          color: "rgba(200,200,200,0.3)",
+        },
+        ticks: {
+          color: "#333333",
+        },
+      },
+    },
   };
 
   return (
-    <div className="mt-8 mx-auto max-w-6xl">
+    <div className="graph-container">
       <Card title="Contest Durations" sectioned>
-        <div className="flex flex-col gap-4 bg-white p-6 rounded-lg shadow-lg">
-          <Text variation="strong" className="text-xl font-semibold text-gray-800">
+        <div className="graph-content">
+          <Text variation="strong" className="graph-title">
             Contest Durations
           </Text>
-          <div className="bg-gray-100 p-4 rounded-lg shadow-sm">
-            <Bar ref={chartRef} data={data} options={options} />
-          </div>
+          <Bar ref={chartRef} data={data} options={options} />
         </div>
       </Card>
     </div>

@@ -16,6 +16,7 @@ import Favorites from "../components/Favorites";
 import Graph from "../components/Graph";
 import { fetchContests } from "../utils/api";
 import { debounce } from "lodash";
+import './styles/Dashboard.css';  // Import the custom CSS file
 
 const Dashboard = () => {
   const [contests, setContests] = useState([]);
@@ -78,26 +79,21 @@ const Dashboard = () => {
       <Layout>
         {/* Search Bar Section */}
         <Layout.Section className="bg-teal-100 p-4 rounded-lg shadow-lg">
-      <Card 
-        sectioned 
-        className="bg-teal-100 border-blue-200 rounded-lg shadow-md hover:shadow-lg transition-shadow"
-      >
-        <TextField
-          label={
-            <span className="text-lg font-semibold text-blue-600">
-              Search Contests
-            </span>
-          }
-          value={searchQuery}
-          onChange={handleSearch}
-          placeholder="Enter contest name"
-          clearButton
-          className="border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 p-2"
-          placeholderTextClassName="text-gray-400 italic"
-        />
-      </Card>
-    </Layout.Section>
-
+          <Card 
+            sectioned 
+            className="bg-teal-100 border-blue-200 rounded-lg shadow-md hover:shadow-lg transition-shadow"
+          >
+            <TextField
+              label={<span className="text-lg font-semibold text-blue-600">Search Contests</span>}
+              value={searchQuery}
+              onChange={handleSearch}
+              placeholder="Enter contest name"
+              clearButton
+              className="border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 p-2"
+              placeholderTextClassName="text-gray-400 italic"
+            />
+          </Card>
+        </Layout.Section>
 
         {/* Type Filter Section */}
         <Layout.Section>
@@ -146,52 +142,51 @@ const Dashboard = () => {
 
         {/* Pagination Section */}
         <Layout.Section>
-  <Card sectioned>
-    <div className="flex justify-between items-center">
-      {/* Previous Button */}
-      <Button
-        onClick={() => setPage(page - 1)}
-        disabled={page === 1}
-        primary
-        className="px-4 py-2 bg-blue-500 text-white rounded shadow disabled:bg-gray-300 disabled:cursor-not-allowed hover:bg-blue-600"
-      >
-        Previous
-      </Button>
-      
-      {/* Page Count */}
-      <span className="text-gray-600">
-        Page <span className="font-semibold">{page}</span> of{" "}
-        <span className="font-semibold">{Math.ceil(filteredContests.length / perPage)}</span>
-      </span>
-      
-      {/* Next Button */}
-      <Button
-        onClick={() => setPage(page + 1)}
-        disabled={page === Math.ceil(filteredContests.length / perPage)}
-        primary
-        className="px-4 py-2 bg-blue-500 text-white rounded shadow disabled:bg-gray-300 disabled:cursor-not-allowed hover:bg-blue-600"
-      >
-        Next
-      </Button>
-    </div>
+          <Card sectioned>
+            <div className="flex justify-between items-center">
+              {/* Previous Button */}
+              <Button
+                onClick={() => setPage(page - 1)}
+                disabled={page === 1}
+                primary
+                className="px-4 py-2 bg-blue-500 text-white rounded shadow disabled:bg-gray-300 disabled:cursor-not-allowed hover:bg-blue-600"
+              >
+                Previous
+              </Button>
+              
+              {/* Page Count */}
+              <span className="text-gray-600">
+                Page <span className="font-semibold">{page}</span> of{" "}
+                <span className="font-semibold">{Math.ceil(filteredContests.length / perPage)}</span>
+              </span>
+              
+              {/* Next Button */}
+              <Button
+                onClick={() => setPage(page + 1)}
+                disabled={page === Math.ceil(filteredContests.length / perPage)}
+                primary
+                className="px-4 py-2 bg-blue-500 text-white rounded shadow disabled:bg-gray-300 disabled:cursor-not-allowed hover:bg-blue-600"
+              >
+                Next
+              </Button>
+            </div>
 
-    {/* Optional: Items per page selector */}
-    <div className="mt-4 sm:mt-0 flex justify-center items-center space-x-4">
-      <span className="text-gray-600">Items per page: </span>
-      <Select
-        value={perPage}
-        onChange={(e) => setPerPage(Number(e))}
-        options={[
-          { label: '10', value: 10 },
-          { label: '20', value: 20 },
-          { label: '50', value: 50 },
-        ]}
-        className="p-2 border border-gray-300 rounded shadow focus:outline-none focus:ring-2 focus:ring-blue-500"
-      />
-    </div>
-  </Card>
-</Layout.Section>
-
+            {/* Optional: Items per page selector */}
+            <div className="mt-4 sm:mt-0 flex justify-center items-center space-x-4">
+              <span className="text-gray-600">Items per page: </span>
+              <Select
+                value={perPage}
+                onChange={(e) => setPerPage(Number(e))}
+                options={[
+                  { label: '10', value: 10 },
+                  { label: '20', value: 20 },
+                  { label: '50', value: 50 },
+                ]}
+                className="p-2 border border-gray-300 rounded shadow focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+            </div>
+          </Card>
+        </Layout.Section>
 
         {/* Graph Section */}
         <Layout.Section>

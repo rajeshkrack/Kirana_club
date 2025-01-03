@@ -1,6 +1,7 @@
 import React from "react";
-import { Button, Select, BlockStack, Stack, Icon } from "@shopify/polaris";
-import { ChevronLeftMinor, ChevronRightMinor } from '@shopify/polaris-icons';
+import { Button, Select, Stack, Icon, Text } from "@shopify/polaris";
+import { ChevronLeftMinor, ChevronRightMinor } from "@shopify/polaris-icons";
+import "./styles/Pagination.css"; // Import custom styles
 
 const Pagination = ({ total, page, perPage, onPageChange, onPerPageChange }) => {
   const totalPages = Math.ceil(total / perPage);
@@ -24,42 +25,31 @@ const Pagination = ({ total, page, perPage, onPageChange, onPerPageChange }) => 
   ];
 
   return (
-    <div className="mt-6">
+    <div className="pagination-container">
       <Stack alignment="center" distribution="spaceBetween">
         {/* Pagination Controls */}
         <Stack spacing="tight">
           <Button
             onClick={handlePrevPage}
             disabled={page === 1}
-            icon={ChevronLeftMinor}
+            icon={<Icon source={ChevronLeftMinor} />}
             plain
-            style={{
-              backgroundColor: page === 1 ? '#f1f1f1' : '#0061f2',
-              color: page === 1 ? '#ccc' : '#fff',
-              borderRadius: '4px',
-              padding: '8px 12px',
-            }}
+            className="pagination-button"
           >
             Previous
           </Button>
 
-          <BlockStack>
-            <Text variation="strong" style={{ fontSize: '1.1rem' }}>
-              Page <strong>{page}</strong> of <strong>{totalPages}</strong>
-            </Text>
-          </BlockStack>
+          <Text variation="strong" className="pagination-info">
+            Page <span className="highlight">{page}</span> of{" "}
+            <span className="highlight">{totalPages}</span>
+          </Text>
 
           <Button
             onClick={handleNextPage}
             disabled={page === totalPages}
-            icon={ChevronRightMinor}
+            icon={<Icon source={ChevronRightMinor} />}
             plain
-            style={{
-              backgroundColor: page === totalPages ? '#f1f1f1' : '#0061f2',
-              color: page === totalPages ? '#ccc' : '#fff',
-              borderRadius: '4px',
-              padding: '8px 12px',
-            }}
+            className="pagination-button"
           >
             Next
           </Button>
@@ -71,12 +61,7 @@ const Pagination = ({ total, page, perPage, onPageChange, onPerPageChange }) => 
           options={perPageOptions}
           value={perPage.toString()}
           onChange={handlePerPageChange}
-          style={{
-            width: '120px',
-            borderColor: '#0061f2',
-            backgroundColor: '#f7f7f7',
-            borderRadius: '4px',
-          }}
+          className="items-per-page-dropdown"
         />
       </Stack>
     </div>

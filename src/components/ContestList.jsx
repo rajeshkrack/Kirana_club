@@ -1,6 +1,8 @@
+// ContestList.jsx
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Card, Button, Text } from "@shopify/polaris";
+import "./styles/ContestList.css"; // Importing the custom CSS file
 
 const ContestList = ({ contests, favorites, onFavoriteToggle }) => {
   const [selectedContestId, setSelectedContestId] = useState(null);
@@ -10,57 +12,25 @@ const ContestList = ({ contests, favorites, onFavoriteToggle }) => {
     setSelectedContestId(contestId);
   };
 
-  // Function to determine the color based on the contest phase
-  const getPhaseColor = (phase) => {
-    switch (phase.toLowerCase()) {
-      case "finished":
-        return "bg-green-500 text-white"; // Green for finished
-      case "before":
-        return "bg-yellow-500 text-white"; // Yellow for before
-      case "coding":
-        return "bg-blue-500 text-white"; // Blue for coding
-      default:
-        return "bg-gray-500 text-white"; // Default color
-    }
-  };
-
-  // Function to determine the color based on the contest type
-  const getTypeColor = (type) => {
-    switch (type.toLowerCase()) {
-      case "cf":
-        return "bg-red-600 text-white"; // Red for Codeforces
-      case "icpc":
-        return "bg-yellow-800 text-white"; // Dark Yellow for ICPC
-      case "regular":
-        return "bg-purple-500 text-white"; // Purple for regular
-      case "contest":
-        return "bg-orange-500 text-white"; // Orange for contest
-      case "virtual":
-        return "bg-teal-500 text-white"; // Teal for virtual
-      default:
-        return "bg-gray-300 text-gray-800"; // Default gray for other types
-    }
-  };
-
   return (
     <div>
       <Card sectioned>
-        <table className="min-w-full border-collapse border border-gray-300">
+        <table className="contest-table">
           <thead>
-            <tr className="bg-blue-600 text-white">
-              <th className="border p-2">
+            <tr className="contest-table-header">
+              <th>
                 <Text variation="strong">Name</Text>
               </th>
-              <th className="border p-2">
+              <th>
                 <Text variation="strong">Type</Text>
               </th>
-              <th className="border p-2">
+              <th>
                 <Text variation="strong">Phase</Text>
               </th>
-              <th className="border p-2">
+              <th>
                 <Text variation="strong">Start Time</Text>
               </th>
-              <th className="border p-2">
+              <th>
                 <Text variation="strong">Favorite</Text>
               </th>
             </tr>
@@ -69,40 +39,34 @@ const ContestList = ({ contests, favorites, onFavoriteToggle }) => {
             {contests.map((contest) => (
               <tr
                 key={contest.id}
-                className="border hover:bg-gray-100"
+                className={`contest-row ${
+                  selectedContestId === contest.id ? "contest-row-selected" : ""
+                }`}
                 onClick={() => handleContestClick(contest.id)}
               >
-                <td className="border p-2">
+                <td>
                   <Link
                     to={`/contest/${contest.id}`}
-                    className={`${
-                      selectedContestId === contest.id
-                        ? "text-blue-600 font-bold"
-                        : "text-blue-500"
-                    } hover:underline text-lg font-semibold`}
+                    className="contest-name-link"
                   >
                     {contest.name}
                   </Link>
                 </td>
-                <td className={`border p-2 ${getTypeColor(contest.type)}`}>
+                <td className={`contest-type ${contest.type.toLowerCase()}`}>
                   {contest.type}
                 </td>
-                <td className={`border p-2 ${getPhaseColor(contest.phase)}`}>
+                <td className={`contest-phase ${contest.phase.toLowerCase()}`}>
                   {contest.phase}
                 </td>
-                <td className="border p-2">
-                  {new Date(contest.startTimeSeconds * 1000).toLocaleString()}
-                </td>
-                <td className="border p-2 text-center">
+                <td>{new Date(contest.startTimeSeconds * 1000).toLocaleString()}</td>
+                <td className="text-center">
                   <Button
                     onClick={() => onFavoriteToggle(contest.id)}
                     size="slim"
                     primary={favorites.includes(contest.id)}
-                    className={`${
-                      favorites.includes(contest.id)
-                        ? "bg-red-600 text-white hover:bg-red-700"
-                        : "bg-gray-300 text-gray-800 hover:bg-gray-400"
-                    } px-3 py-1 rounded`}
+                    className={`favorite-button ${
+                      favorites.includes(contest.id) ? "favorited" : "not-favorited"
+                    }`}
                   >
                     {favorites.includes(contest.id) ? "Unfavorite" : "Favorite"}
                   </Button>

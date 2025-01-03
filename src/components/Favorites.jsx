@@ -1,5 +1,7 @@
+// Favorites.jsx
 import React from "react";
 import { Button, Card, Text, CalloutCard } from "@shopify/polaris";
+import "./styles/Favorites.css"; // Importing the custom CSS file
 
 const Favorites = ({ contests, favorites, onFavoriteToggle }) => {
   const favoriteContests = contests.filter((contest) =>
@@ -8,25 +10,25 @@ const Favorites = ({ contests, favorites, onFavoriteToggle }) => {
 
   return (
     <Card title="Favorites" sectioned>
-      <div className="max-h-48 overflow-y-auto">
+      <div className="favorites-container">
         {favoriteContests.length > 0 ? (
           <div>
-            <h3 className="text-xl font-semibold text-gray-800 mb-4">
+            <h3 className="favorites-title">
               Here is your favorite list
             </h3>
             {favoriteContests.map((contest) => (
               <div
                 key={contest.id}
-                className="flex justify-between items-center mb-4 py-2 px-4 border-b border-gray-300"
+                className="favorite-item"
               >
-                <Text variation="strong" className="text-lg text-gray-800">
+                <Text variation="strong" className="favorite-item-name">
                   {contest.name}
                 </Text>
                 <Button
                   onClick={() => onFavoriteToggle(contest.id)}
                   destructive
                   accessibilityLabel={`Remove ${contest.name} from favorites`}
-                  className="bg-red-600 hover:bg-red-700 text-white"
+                  className="remove-button"
                 >
                   Remove
                 </Button>
@@ -34,7 +36,7 @@ const Favorites = ({ contests, favorites, onFavoriteToggle }) => {
             ))}
           </div>
         ) : (
-          <div className="flex flex-col items-center space-y-4 w-full">
+          <div className="no-favorites">
             <CalloutCard
               title="No favorite contests yet"
               illustration="https://cdn.shopify.com/s/files/1/0264/2036/6839/files/empty-state.svg"
@@ -42,9 +44,9 @@ const Favorites = ({ contests, favorites, onFavoriteToggle }) => {
                 content: "Explore Contests",
                 url: "/contests", // Replace with your actual contests page URL
               }}
-              className="bg-gray-100 w-full p-4"
+              className="callout-card"
             >
-              <p className="text-gray-600">
+              <p className="no-favorites-text">
                 You haven't added any contests to your favorites yet. Start exploring and add some!
               </p>
             </CalloutCard>
