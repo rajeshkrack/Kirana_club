@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { fetchContests } from "../utils/api";
 import { formatDate } from "../utils/helpers";
-import { Page, Card, BlockStack, Text , Spinner, Layout } from "@shopify/polaris";
+import { Page, Card, BlockStack, Text, Spinner, Layout, Footer } from "@shopify/polaris";
 
 const ContestPage = () => {
   const { contestId } = useParams();
@@ -17,7 +17,7 @@ const ContestPage = () => {
 
   if (!contest) {
     return (
-      <div className="flex items-center justify-center min-h-screen">
+      <div className="flex items-center justify-center min-h-screen bg-gray-100">
         <Spinner size="large" />
       </div>
     );
@@ -29,30 +29,37 @@ const ContestPage = () => {
         <Layout.Section>
           <Card title="Contest Details" sectioned>
             <BlockStack>
-              <h2 className="text-2xl font-bold text-gray-800 mb-4">{contest.name}</h2>
-              <div className="text-gray-600 space-y-2">
+              <h2 className="text-3xl font-semibold text-blue-700 mb-6">{contest.name}</h2>
+              <div className="space-y-4 text-gray-700">
                 <p>
-                  <Text  variation="strong">Type:</Text > {contest.type}
+                  <Text variation="strong" className="text-blue-600">Type:</Text> {contest.type}
                 </p>
                 <p>
-                  <Text  variation="strong">Phase:</Text > {contest.phase}
+                  <Text variation="strong" className="text-blue-600">Phase:</Text> {contest.phase}
                 </p>
                 <p>
-                  <Text  variation="strong">Start Time:</Text > {formatDate(contest.startTimeSeconds)}
+                  <Text variation="strong" className="text-blue-600">Start Time:</Text> {formatDate(contest.startTimeSeconds)}
                 </p>
                 <p>
-                  <Text  variation="strong">Duration:</Text > {contest.durationSeconds / 3600} hours
+                  <Text variation="strong" className="text-blue-600">Duration:</Text> {contest.durationSeconds / 3600} hours
                 </p>
               </div>
             </BlockStack>
           </Card>
         </Layout.Section>
       </Layout>
-      <footer className="bg-gray-800 text-white py-4 mt-6">
-        <div className="container mx-auto text-center">
+
+      {/* Using Footer from Polaris */}
+      <Footer
+        primaryAction={{
+          content: "Go to Contests",
+          url: "/contests", // Replace with your contest listing page URL
+        }}
+      >
+        <div className="text-center text-white py-6 bg-gray-800">
           <p>&copy; 2025 Codeforces Dashboard. All rights reserved.</p>
         </div>
-      </footer>
+      </Footer>
     </Page>
   );
 };

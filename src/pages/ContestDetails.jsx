@@ -2,15 +2,13 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { fetchContests } from "../utils/api";
 import { formatDate } from "../utils/helpers";
-import { Card, Spinner } from "@shopify/polaris";
 
 const ContestDetails = () => {
-  const { contestId } = useParams(); // Extract the contest ID from the route
+  const { contestId } = useParams();
   const [contest, setContest] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Fetch contest data and find the specific contest by its ID
     fetchContests().then((data) => {
       const selectedContest = data.find((item) => item.id === Number(contestId));
       setContest(selectedContest);
@@ -20,44 +18,46 @@ const ContestDetails = () => {
 
   if (loading) {
     return (
-      <div className="text-center mt-10">
-        <Spinner size="large" />
+      <div className="flex justify-center items-center min-h-screen bg-gray-100">
+        <div className="spinner-border animate-spin w-16 h-16 border-4 border-blue-500 border-t-transparent rounded-full"></div>
       </div>
     );
   }
 
   if (!contest) {
     return (
-      <div className="text-center mt-10 text-lg font-medium">
-        Contest not found!
+      <div className="flex justify-center items-center min-h-screen bg-gray-100">
+        <p className="text-xl font-semibold text-red-600">Contest not found!</p>
       </div>
     );
   }
 
   return (
-    <div className="p-6 max-w-4xl mx-auto">
-      <Card title="Contest Details" sectioned>
-        <BlockStack>
-          <h1 className="text-3xl font-bold text-blue-600 mb-4">{contest.name}</h1>
-          <p>
-            <Text  variation="strong">ID:</Text > {contest.id}
+    <div className="bg-gray-100 min-h-screen p-6">
+      <div className="max-w-4xl mx-auto bg-white rounded-lg shadow-lg border border-gray-200">
+        <div className="bg-blue-600 text-white px-6 py-4 rounded-t-lg">
+        <h1 className="text-3xl font-bold text-blue-600 mb-4">{contest.name}</h1>
+        </div>
+        <div className="p-6 space-y-4">
+          <p className="text-lg text-gray-800">
+            <span className="font-semibold text-blue-600">ID:</span> {contest.id}
           </p>
-          <p>
-            <Text  variation="strong">Type:</Text > {contest.type}
+          <p className="text-lg text-gray-800">
+            <span className="font-semibold text-blue-600">Type:</span> {contest.type}
           </p>
-          <p>
-            <Text  variation="strong">Phase:</Text > {contest.phase}
+          <p className="text-lg text-gray-800">
+            <span className="font-semibold text-blue-600">Phase:</span> {contest.phase}
           </p>
-          <p>
-            <Text  variation="strong">Start Time:</Text >{" "}
+          <p className="text-lg text-gray-800">
+            <span className="font-semibold text-blue-600">Start Time:</span>{" "}
             {formatDate(contest.startTimeSeconds)}
           </p>
-          <p>
-            <Text  variation="strong">Duration:</Text >{" "}
+          <p className="text-lg text-gray-800">
+            <span className="font-semibold text-blue-600">Duration:</span>{" "}
             {contest.durationSeconds / 3600} hours
           </p>
-        </BlockStack>
-      </Card>
+        </div>
+      </div>
     </div>
   );
 };

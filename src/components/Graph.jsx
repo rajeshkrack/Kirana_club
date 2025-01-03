@@ -33,7 +33,7 @@ const Graph = ({ contests, filterPhase, filterType }) => {
       {
         label: "Duration (Seconds)",
         data: filteredContests.map((contest) => contest.durationSeconds),
-        backgroundColor: "rgba(75,192,192,0.6)",
+        backgroundColor: "rgba(75,192,192,0.6)", // Greenish color
       },
     ],
   };
@@ -47,6 +47,10 @@ const Graph = ({ contests, filterPhase, filterType }) => {
       title: {
         display: true,
         text: "Contest Durations",
+        font: {
+          size: 18,
+        },
+        color: "#333",
       },
       tooltip: {
         callbacks: {
@@ -64,11 +68,15 @@ const Graph = ({ contests, filterPhase, filterType }) => {
   };
 
   return (
-    <div className="mt-8">
+    <div className="mt-8 mx-auto max-w-6xl">
       <Card title="Contest Durations" sectioned>
-        <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
-          <Text variation="strong">Contest Durations</Text>
-          <Bar ref={chartRef} data={data} options={options} />
+        <div className="flex flex-col gap-4 bg-white p-6 rounded-lg shadow-lg">
+          <Text variation="strong" className="text-xl font-semibold text-gray-800">
+            Contest Durations
+          </Text>
+          <div className="bg-gray-100 p-4 rounded-lg shadow-sm">
+            <Bar ref={chartRef} data={data} options={options} />
+          </div>
         </div>
       </Card>
     </div>

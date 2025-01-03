@@ -27,18 +27,26 @@ const Pagination = ({ total, page, perPage, onPageChange, onPerPageChange }) => 
     <div className="mt-6">
       <Stack alignment="center" distribution="spaceBetween">
         {/* Pagination Controls */}
-        <Stack>
+        <Stack spacing="tight">
           <Button
             onClick={handlePrevPage}
             disabled={page === 1}
             icon={ChevronLeftMinor}
             plain
+            style={{
+              backgroundColor: page === 1 ? '#f1f1f1' : '#0061f2',
+              color: page === 1 ? '#ccc' : '#fff',
+              borderRadius: '4px',
+              padding: '8px 12px',
+            }}
           >
             Previous
           </Button>
 
           <BlockStack>
-            Page <strong>{page}</strong> of <strong>{totalPages}</strong>
+            <Text variation="strong" style={{ fontSize: '1.1rem' }}>
+              Page <strong>{page}</strong> of <strong>{totalPages}</strong>
+            </Text>
           </BlockStack>
 
           <Button
@@ -46,6 +54,12 @@ const Pagination = ({ total, page, perPage, onPageChange, onPerPageChange }) => 
             disabled={page === totalPages}
             icon={ChevronRightMinor}
             plain
+            style={{
+              backgroundColor: page === totalPages ? '#f1f1f1' : '#0061f2',
+              color: page === totalPages ? '#ccc' : '#fff',
+              borderRadius: '4px',
+              padding: '8px 12px',
+            }}
           >
             Next
           </Button>
@@ -57,6 +71,12 @@ const Pagination = ({ total, page, perPage, onPageChange, onPerPageChange }) => 
           options={perPageOptions}
           value={perPage.toString()}
           onChange={handlePerPageChange}
+          style={{
+            width: '120px',
+            borderColor: '#0061f2',
+            backgroundColor: '#f7f7f7',
+            borderRadius: '4px',
+          }}
         />
       </Stack>
     </div>
