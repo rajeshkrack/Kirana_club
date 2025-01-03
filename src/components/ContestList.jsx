@@ -1,29 +1,27 @@
 import React from "react";
-import { Link } from "@shopify/polaris";
-import { Button, Card, TextStyle } from "@shopify/polaris";
+import { Link, Button, Card, Text } from "@shopify/polaris";
 
 const ContestList = ({ contests, favorites, onFavoriteToggle }) => {
   return (
     <div className="space-y-4">
       <Card>
-        <Card.Section>
           <table className="min-w-full">
             <thead>
               <tr>
                 <th className="border p-2">
-                  <TextStyle variation="strong">Name</TextStyle>
+                  <Text variation="strong">Name</Text>
                 </th>
                 <th className="border p-2">
-                  <TextStyle variation="strong">Type</TextStyle>
+                  <Text variation="strong">Type</Text>
                 </th>
                 <th className="border p-2">
-                  <TextStyle variation="strong">Phase</TextStyle>
+                  <Text variation="strong">Phase</Text>
                 </th>
                 <th className="border p-2">
-                  <TextStyle variation="strong">Start Time</TextStyle>
+                  <Text variation="strong">Start Time</Text>
                 </th>
                 <th className="border p-2">
-                  <TextStyle variation="strong">Favorite</TextStyle>
+                  <Text variation="strong">Favorite</Text>
                 </th>
               </tr>
             </thead>
@@ -53,7 +51,6 @@ const ContestList = ({ contests, favorites, onFavoriteToggle }) => {
               ))}
             </tbody>
           </table>
-        </Card.Section>
       </Card>
     </div>
   );

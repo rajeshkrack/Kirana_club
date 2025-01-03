@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { fetchContests } from "../utils/api";
 import { formatDate } from "../utils/helpers";
-import { Card, TextContainer, TextStyle, Spinner } from "@shopify/polaris";
+import { Card, Spinner } from "@shopify/polaris";
 
 const ContestDetails = () => {
   const { contestId } = useParams(); // Extract the contest ID from the route
@@ -37,26 +37,26 @@ const ContestDetails = () => {
   return (
     <div className="p-6 max-w-4xl mx-auto">
       <Card title="Contest Details" sectioned>
-        <TextContainer>
+        <BlockStack>
           <h1 className="text-3xl font-bold text-blue-600 mb-4">{contest.name}</h1>
           <p>
-            <TextStyle variation="strong">ID:</TextStyle> {contest.id}
+            <Text  variation="strong">ID:</Text > {contest.id}
           </p>
           <p>
-            <TextStyle variation="strong">Type:</TextStyle> {contest.type}
+            <Text  variation="strong">Type:</Text > {contest.type}
           </p>
           <p>
-            <TextStyle variation="strong">Phase:</TextStyle> {contest.phase}
+            <Text  variation="strong">Phase:</Text > {contest.phase}
           </p>
           <p>
-            <TextStyle variation="strong">Start Time:</TextStyle>{" "}
+            <Text  variation="strong">Start Time:</Text >{" "}
             {formatDate(contest.startTimeSeconds)}
           </p>
           <p>
-            <TextStyle variation="strong">Duration:</TextStyle>{" "}
+            <Text  variation="strong">Duration:</Text >{" "}
             {contest.durationSeconds / 3600} hours
           </p>
-        </TextContainer>
+        </BlockStack>
       </Card>
     </div>
   );

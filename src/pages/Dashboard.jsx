@@ -1,10 +1,21 @@
 import React, { useEffect, useState } from "react";
-import { Button, Card, Dropdown, TextField, Pagination, Spinner, Page, Layout, TextContainer, Banner } from "@shopify/polaris";
+import {
+  Button,
+  Card,
+  Select,
+  TextField,
+  Pagination,
+  Spinner,
+  Page,
+  Layout,
+  BlockStack,
+  CalloutCard,
+} from "@shopify/polaris";
 import ContestList from "../components/ContestList";
 import Favorites from "../components/Favorites";
 import Graph from "../components/Graph";
 import { fetchContests } from "../utils/api";
-import { debounce } from "lodash"; // Add lodash for debouncing
+import { debounce } from "lodash";
 
 const Dashboard = () => {
   const [contests, setContests] = useState([]);
@@ -81,7 +92,7 @@ const Dashboard = () => {
         {/* Type Filter Section */}
         <Layout.Section>
           <Card sectioned>
-            <Dropdown
+            <Select
               label="Filter by Type"
               options={[
                 { label: "All", value: "" },
@@ -137,9 +148,9 @@ const Dashboard = () => {
         {/* Graph Section */}
         <Layout.Section>
           <Card sectioned>
-            <TextContainer>
+            <BlockStack>
               <h2>Contest Trends</h2>
-            </TextContainer>
+            </BlockStack>
             <Graph contests={filteredContests} />
           </Card>
         </Layout.Section>

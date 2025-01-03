@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { fetchContests } from "../utils/api";
 import { formatDate } from "../utils/helpers";
-import { Page, Card, TextContainer, TextStyle, Spinner, Layout } from "@shopify/polaris";
+import { Page, Card, BlockStack, Text , Spinner, Layout } from "@shopify/polaris";
 
 const ContestPage = () => {
   const { contestId } = useParams();
@@ -28,23 +28,23 @@ const ContestPage = () => {
       <Layout>
         <Layout.Section>
           <Card title="Contest Details" sectioned>
-            <TextContainer>
+            <BlockStack>
               <h2 className="text-2xl font-bold text-gray-800 mb-4">{contest.name}</h2>
               <div className="text-gray-600 space-y-2">
                 <p>
-                  <TextStyle variation="strong">Type:</TextStyle> {contest.type}
+                  <Text  variation="strong">Type:</Text > {contest.type}
                 </p>
                 <p>
-                  <TextStyle variation="strong">Phase:</TextStyle> {contest.phase}
+                  <Text  variation="strong">Phase:</Text > {contest.phase}
                 </p>
                 <p>
-                  <TextStyle variation="strong">Start Time:</TextStyle> {formatDate(contest.startTimeSeconds)}
+                  <Text  variation="strong">Start Time:</Text > {formatDate(contest.startTimeSeconds)}
                 </p>
                 <p>
-                  <TextStyle variation="strong">Duration:</TextStyle> {contest.durationSeconds / 3600} hours
+                  <Text  variation="strong">Duration:</Text > {contest.durationSeconds / 3600} hours
                 </p>
               </div>
-            </TextContainer>
+            </BlockStack>
           </Card>
         </Layout.Section>
       </Layout>

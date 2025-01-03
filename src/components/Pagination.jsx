@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Select, TextContainer, Stack, Icon } from "@shopify/polaris";
+import { Button, Select, BlockStack, Stack, Icon } from "@shopify/polaris";
 import { ChevronLeftMinor, ChevronRightMinor } from '@shopify/polaris-icons';
 
 const Pagination = ({ total, page, perPage, onPageChange, onPerPageChange }) => {
@@ -37,9 +37,9 @@ const Pagination = ({ total, page, perPage, onPageChange, onPerPageChange }) => 
             Previous
           </Button>
 
-          <TextContainer>
+          <BlockStack>
             Page <strong>{page}</strong> of <strong>{totalPages}</strong>
-          </TextContainer>
+          </BlockStack>
 
           <Button
             onClick={handleNextPage}

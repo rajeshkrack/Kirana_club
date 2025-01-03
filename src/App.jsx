@@ -5,16 +5,19 @@ import ContestDetails from "./pages/ContestDetails";
 
 function App() {
   return (
+    <>
     <AppProvider i18n={{}}>
-      <Router>
+      {/* <Router>
         <div className="bg-gray-100 min-h-screen">
           <Routes>
             <Route path="/" element={<Dashboard />} />
             <Route path="/contest/:contestId" element={<ContestDetails />} />
           </Routes>
         </div>
-      </Router>
+      </Router> */}
     </AppProvider>
+    <Dashboard />
+    </>
   );
 }
 
